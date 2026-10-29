@@ -39,7 +39,7 @@ Os valores Zoho dependem da região/conta. Confirme-os no Admin Console Zoho, se
 
 ## Conteúdo e identidade
 
-Os dois PNG fornecidos foram preservados. O PDF de estudos de marca não é incluído no repositório público. As especialidades no site são temas de consulta, não comprovação de serviços ou experiência. Confirmar o escopo comercial com a VARS antes de transformá-las em afirmações de capacidade. Nenhum projeto, cliente, certificação, endereço ou número de desempenho foi inventado.
+Os dois PNG fornecidos foram preservados. O PDF de estudos de marca não é incluído no repositório público. Experiência em EGSE, engenharia de AIT e engenharia de sistemas foi informada pelo usuário. As demais especialidades permanecem temas de consulta. Confirmar o escopo comercial diretamente com a VARS. Nenhum projeto, cliente, certificação, endereço ou número de desempenho foi inventado.
 
 Contato confirmado no histórico: venicius@vars.com.br. O link mailto abre o aplicativo do visitante; não existe formulário ou servidor de envio. Nenhum rastreador, cookie de análise, fonte remota ou biblioteca externa é utilizado. localStorage guarda apenas a preferência de idioma.
 
