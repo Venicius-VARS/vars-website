@@ -35,13 +35,13 @@ PRESERVAR integralmente:
 - Todos os seletores DKIM do Zoho em <seletor>._domainkey, TXT ou CNAME, exatamente como estão.
 - TXT de verificação Zoho, _dmarc e quaisquer registros de serviços existentes.
 
-Os valores Zoho dependem da região/conta. Confirme-os no Admin Console Zoho, sem copiar valores genéricos. Depois da alteração, compare MX, SPF e DKIM com a cópia anterior, valide o domínio no Zoho e teste envio e recebimento externo para venicius@vars.com.br. Se houver divergência, restaure os registros de e-mail da cópia. A configuração do site não exige mudar nenhum registro de e-mail.
+Os valores Zoho dependem da região/conta. Confirme-os no Admin Console Zoho, sem copiar valores genéricos. Depois da alteração, compare MX, SPF e DKIM com a cópia anterior, valide o domínio no Zoho e teste envio e recebimento externo para contato@vars.com.br. Se houver divergência, restaure os registros de e-mail da cópia. A configuração do site não exige mudar nenhum registro de e-mail.
 
 ## Conteúdo e identidade
 
 Os dois PNG fornecidos foram preservados. O PDF de estudos de marca não é incluído no repositório público. Experiência em EGSE, engenharia de AIT e engenharia de sistemas foi informada pelo usuário. As demais especialidades permanecem temas de consulta. Confirmar o escopo comercial diretamente com a VARS. Nenhum projeto, cliente, certificação, endereço ou número de desempenho foi inventado.
 
-Contato confirmado no histórico: venicius@vars.com.br. O link mailto abre o aplicativo do visitante; não existe formulário ou servidor de envio. Nenhum rastreador, cookie de análise, fonte remota ou biblioteca externa é utilizado. localStorage guarda apenas a preferência de idioma.
+Contato solicitado pelo usuário: contato@vars.com.br. O link mailto abre o aplicativo do visitante; não existe formulário ou servidor de envio. Nenhum rastreador, cookie de análise, fonte remota ou biblioteca externa é utilizado. localStorage guarda apenas a preferência de idioma.
 
 Arquivos: index.html, style.css, script.js, assets/*.png, CNAME e .nojekyll. Responsividade por CSS, foco visível, navegação por teclado, link de salto, contraste e preferência por movimento reduzido. A revisão visual final em navegador deve incluir celular e desktop, zoom 200%, EN/PT e envio de e-mail.
 
