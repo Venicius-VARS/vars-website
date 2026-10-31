@@ -677,6 +677,24 @@ body::before{content:"";position:fixed;inset:0 auto 0 0;width:5px;background:#b2
 @media(prefers-reduced-motion:reduce){
   .contact-box .iso-ghost{animation:none;opacity:.8;filter:none;will-change:auto}
 }
+
+/* Hover glow exclusively for the two main hero CTAs */
+.hero-copy > .hero-actions .btn{
+  transition: box-shadow .35s ease, transform .35s ease, border-color .35s ease, background-color .35s ease;
+}
+.hero-copy > .hero-actions .btn-primary:hover{
+  box-shadow: 0 0 16px rgba(178,30,46,.62), 0 0 34px rgba(178,30,46,.33);
+  transform: translateY(-2px);
+}
+.hero-copy > .hero-actions .btn-secondary:hover{
+  border-color: rgba(246,247,249,.68);
+  box-shadow: 0 0 15px rgba(246,247,249,.25), 0 0 30px rgba(160,185,215,.12);
+  transform: translateY(-2px);
+}
+@media(prefers-reduced-motion:reduce){
+  .hero-copy > .hero-actions .btn{transition:none}
+  .hero-copy > .hero-actions .btn:hover{transform:none}
+}
 </style>
 </head>
 <body>
