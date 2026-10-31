@@ -436,10 +436,6 @@ button { font: inherit; }
     linear-gradient(180deg, #10151d, #0c1118);
   min-height: 360px;
 }
-.banner-brand .iso {
-  width: 170px;
-  opacity: 1;
-}
 .banner-brand .tagline {
   margin-top: 34px;
   max-width: 18ch;
@@ -694,9 +690,6 @@ body::before{content:"";position:fixed;inset:0 auto 0 0;width:5px;background:#b2
   text-align:center;
   gap:32px;
 }
-.banner-brand .iso{
-  margin:0 auto;
-}
 .banner-brand .tagline{
   margin:0 auto;
   max-width:20ch;
@@ -708,22 +701,36 @@ body::before{content:"";position:fixed;inset:0 auto 0 0;width:5px;background:#b2
     radial-gradient(ellipse 58% 52% at 50% 50%, rgba(46,58,79,.52) 0%, rgba(46,58,79,.15) 58%, transparent 100%),
     linear-gradient(180deg,#10151d,#0c1118);
 }
-.banner-brand .iso{
-  width:210px;
-  max-width:58%;
-  height:auto;
-  margin-inline:auto;
-}
-@media(max-width:640px){
-  .banner-brand .iso{width:180px;max-width:62%}
-}
 
 #value .banner-brand{padding-top:18px;padding-bottom:18px;min-height:0;gap:18px}
-#value .banner-brand .iso{width:240px;max-width:62%}
 #value .banner-copy{padding-top:20px;padding-bottom:20px}
-@media(max-width:640px){#value .banner-brand{padding-top:22px;padding-bottom:22px;gap:18px}#value .banner-brand .iso{width:200px;max-width:66%}#value .banner-copy{padding-top:24px;padding-bottom:24px}}
+@media(max-width:640px){#value .banner-brand{padding-top:22px;padding-bottom:22px;gap:18px}#value .banner-copy{padding-top:24px;padding-bottom:24px}}
 
-#value .banner-brand .tagline{position:relative;top:-30px}
+/* About VARS: centered Michroma statement without the symbol. */
+#value .banner-brand{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:0;
+  padding:36px 28px;
+}
+#value .banner-brand .tagline{
+  position:static;
+  top:auto;
+  margin:0;
+  width:100%;
+  max-width:20ch;
+  font-family:'Michroma','Montserrat',sans-serif;
+  font-size:clamp(1.22rem,2.15vw,2.5rem);
+  line-height:1.24;
+  letter-spacing:-0.03em;
+  text-align:center;
+  text-wrap:balance;
+}
+@media(max-width:640px){
+  #value .banner-brand{padding:40px 22px}
+}
+
 
 .contact-heading-row{display:flex;align-items:center;gap:22px;margin-bottom:22px}
 .contact-heading-row .iso-ghost{width:74px;height:auto;flex:0 0 74px;margin:0}
@@ -849,7 +856,7 @@ body::before{content:"";position:fixed;inset:0 auto 0 0;width:5px;background:#b2
 <noscript><p>Consulte atividades e entregáveis pelo e-mail <a href="mailto:contato@vars.com.br">contato@vars.com.br</a>.</p></noscript>
 </div></section>
     <section class="section" id="approach"><div class="container"><span class="eyebrow fade-in" data-i18n="approachEyebrow">02 / COMO TRABALHAMOS</span><h2 class="section-title fade-in" data-i18n="approachTitle">Nossa metodologia</h2><p class="section-intro fade-in" data-i18n="approachIntro">Atuação orientada por requisitos, interfaces e objetivos técnicos, desde o planejamento até a integração, os testes e a documentação.</p><div class="pillars"><div class="process-panel fade-in"><h3 data-i18n="processTitle">Nossa abordagem</h3><div class="process-list"><div class="process-item"><div class="process-step">01</div><div><h4 data-i18n="step1Title">Compreender o sistema</h4><p data-i18n="step1Text">Analisar objetivos, requisitos, interfaces e restrições técnicas.</p></div></div><div class="process-item"><div class="process-step">02</div><div><h4 data-i18n="step2Title">Planejar a execução</h4><p data-i18n="step2Text">Definir atividades de engenharia, recursos de bancada e critérios de aceitação.</p></div></div><div class="process-item"><div class="process-step">03</div><div><h4 data-i18n="step3Title">Desenvolver e integrar</h4><p data-i18n="step3Text">Desenvolver, configurar e integrar hardware, FPGA, software e equipamentos de teste.</p></div></div><div class="process-item"><div class="process-step">04</div><div><h4 data-i18n="step4Title">Testar e documentar</h4><p data-i18n="step4Text">Executar ensaios, investigar anomalias e registrar evidências técnicas.</p></div></div></div></div><aside class="trust-panel fade-in"><h3 data-i18n="trustTitle">Frentes de atuação</h3><div class="trust-list"><div class="trust-row"><h4 data-i18n="trust1Title">Desenvolvimento</h4><p data-i18n="trust1Text">FPGA, software embarcado, hardware e equipamentos de apoio em solo.</p></div><div class="trust-row"><h4 data-i18n="trust2Title">Integração e ensaios</h4><p data-i18n="trust2Text">Integração funcional, automação de testes, diagnóstico e atividades em bancada.</p></div><div class="trust-row"><h4 data-i18n="trust3Title">Engenharia de sistemas</h4><p data-i18n="trust3Text">Requisitos, interfaces, rastreabilidade, verificação e documentação.</p></div></div></aside></div></div></section>
-    <section class="section" id="value"><div class="container"><span class="eyebrow fade-in" data-i18n="valueEyebrow">03 / SOBRE A VARS</span><h2 class="section-title fade-in" data-i18n="valueTitle">Engenharia especializada para desafios complexos.</h2><div class="split-banner"><div class="banner-brand fade-in"><img class="iso" src="assets/vars-symbol.svg" alt=""><div class="tagline" data-i18n="valueTagline">Desenvolvimento, integração e verificação.</div></div><div class="banner-copy fade-in"><div class="banner-points"><div class="banner-point"><i></i><p data-i18n="valuePoint1">Serviços de desenvolvimento FPGA e software embarcado, incluindo interfaces e integração.</p></div><div class="banner-point"><i></i><p data-i18n="valuePoint2">Desenvolvimento de EGSE, equipamentos de teste e automação de bancada.</p></div><div class="banner-point"><i></i><p data-i18n="valuePoint3">Análise, diagnóstico e reparo de hardware, com suporte técnico à fabricação e integração.</p></div><div class="banner-point"><i></i><p data-i18n="valuePoint4">Engenharia de sistemas, testes funcionais, análise de falhas e documentação de evidências.</p></div></div></div></div></div></section>
+    <section class="section" id="value"><div class="container"><span class="eyebrow fade-in" data-i18n="valueEyebrow">03 / SOBRE A VARS</span><h2 class="section-title fade-in" data-i18n="valueTitle">Engenharia especializada para desafios complexos.</h2><div class="split-banner"><div class="banner-brand fade-in"><div class="tagline" data-i18n="valueTagline">Desenvolvimento, integração e verificação.</div></div><div class="banner-copy fade-in"><div class="banner-points"><div class="banner-point"><i></i><p data-i18n="valuePoint1">Serviços de desenvolvimento FPGA e software embarcado, incluindo interfaces e integração.</p></div><div class="banner-point"><i></i><p data-i18n="valuePoint2">Desenvolvimento de EGSE, equipamentos de teste e automação de bancada.</p></div><div class="banner-point"><i></i><p data-i18n="valuePoint3">Análise, diagnóstico e reparo de hardware, com suporte técnico à fabricação e integração.</p></div><div class="banner-point"><i></i><p data-i18n="valuePoint4">Engenharia de sistemas, testes funcionais, análise de falhas e documentação de evidências.</p></div></div></div></div></div></section>
     <section class="section" id="contact"><div class="container"><span class="eyebrow fade-in" data-i18n="contactEyebrow">04 / CONTATO</span><h2 class="section-title fade-in" data-i18n="contactTitle">Todo desafio merece atenção.</h2><p class="section-intro fade-in" data-i18n="contactIntro">Entre em contato para discutir escopo, interfaces, requisitos e necessidades de apoio em engenharia e desenvolvimento de software.</p><div class="contact-shell"><div class="contact-panel fade-in"><div class="contact-list"><div class="contact-item"><small data-i18n="contactTypeLabel">Atendimento</small><strong data-i18n="contactTypeValue">Serviços de engenharia
 Serviços de informática</strong></div><div class="contact-item"><small data-i18n="contactMailLabel">E-mail</small><strong data-i18n="contactMailValue">contato@vars.com.br</strong></div><div class="contact-item"><small data-i18n="contactLangLabel">Idiomas</small><strong data-i18n="contactLangValue">Português / English</strong></div><div class="contact-item"><small data-i18n="contactUseLabel">Atuação</small><strong data-i18n="contactUseValue">Engenharia aeroespacial e sistemas embarcados</strong></div></div></div><div class="contact-box fade-in"><div class="contact-heading-row"><img class="iso-ghost" src="assets/vars-symbol-muted.svg" alt=""><div class="contact-heading-copy"><span class="eyebrow" data-i18n="boxEyebrow">ENTRE EM CONTATO</span><h3 data-i18n="boxTitle">Converse com a VARS.</h3></div></div><p data-i18n="boxText">Compartilhe as necessidades técnicas do seu projeto e avalie como nossos serviços podem apoiar o desenvolvimento, a integração e os testes.</p><div class="hero-actions" style="margin-top:22px;"><a class="btn btn-primary" href="mailto:contato@vars.com.br" data-i18n="boxCta1">Enviar e-mail</a><a class="btn btn-secondary" href="#capabilities" data-i18n="boxCta2">Conhecer serviços</a></div></div></div></div></section>
   </main>
