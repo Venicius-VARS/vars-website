@@ -717,8 +717,8 @@ body::before{content:"";position:fixed;inset:0 auto 0 0;width:5px;background:#b2
         <div class="hero-panel fade-in">
           <svg class="vars-perimeter" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" focusable="false">
             <defs>
-              <linearGradient id="vars-trail-a" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#b21e2e" stop-opacity="1"/><stop offset="100%" stop-color="#b21e2e" stop-opacity="0.08"/></linearGradient>
-              <linearGradient id="vars-trail-b" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#b21e2e" stop-opacity="1"/><stop offset="100%" stop-color="#b21e2e" stop-opacity="0.08"/></linearGradient>
+              <linearGradient id="vars-trail-a" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#b21e2e" stop-opacity="0.08"/><stop offset="100%" stop-color="#b21e2e" stop-opacity="1"/></linearGradient>
+              <linearGradient id="vars-trail-b" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#b21e2e" stop-opacity="0.08"/><stop offset="100%" stop-color="#b21e2e" stop-opacity="1"/></linearGradient>
             </defs>
             <rect class="vars-perimeter-guide" x=".35" y=".35" width="99.3" height="99.3" rx="4" ry="4"/>
             <path class="vars-perimeter-trail" stroke="url(#vars-trail-a)"/>
@@ -950,7 +950,7 @@ const initMenu = () => {
 
 
 /* Animate two (and only two) curved strokes. Both share the exact same SVG guide.
-   Fade is deliberately reversed: opaque trailing end -> transparent leading end. */
+   Fade increases toward the moving leading end: transparent trailing end -> opaque leading end. */
 function initVarsPerimeter(){
   const svg=document.querySelector('.vars-perimeter');
   if(!svg)return;
