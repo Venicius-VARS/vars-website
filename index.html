@@ -606,7 +606,6 @@ button { font: inherit; }
   .brand-logo { width: 126px; }
 }
 
-/* v1.1 — logo in dedicated visual area, no content overlap */
 .hero-panel {
   display: flex;
   flex-direction: column;
@@ -649,7 +648,6 @@ button { font: inherit; }
   .hero-card-stack { left: auto; right: auto; bottom: auto; }
 }
 
-/* v1.2 — removed decorative hero logo; content starts without empty reserved space */
 .hero-panel { min-height: 0; padding: 24px; display: block; }
 .hero-card-stack { margin-top: 0; position: relative; z-index: 2; }
 .hero-panel .orbit { opacity: 0.16; }
@@ -657,7 +655,6 @@ button { font: inherit; }
   .hero-panel { min-height: 0; padding: 14px; }
 }
 
-/* approved v3 styling; fixed navigation and subtle brand stripe */
 html{scroll-padding-top:108px}
 .topbar{position:sticky;top:0;z-index:1000}
 body::before{content:"";position:fixed;inset:0 auto 0 0;width:5px;background:#b21e2e;z-index:1100;pointer-events:none}
@@ -666,18 +663,15 @@ body::before{content:"";position:fixed;inset:0 auto 0 0;width:5px;background:#b2
 .vars-header-name{font:400 20px 'Michroma',sans-serif;color:#f6f7f9;letter-spacing:.025em}
 @media(max-width:640px){body::before{width:3px}.vars-header-symbol{width:33px;height:34px}.vars-header-name{font-size:15px}.topbar{position:sticky;top:0}}
 
-/* Slightly loosen major headings without changing typography */
 .hero-copy h1 { letter-spacing: 0.015em; }
 .section-title { letter-spacing: 0.02em; }
 
-/* Exactly two synchronized, continuous strokes along the rounded border. */
 .hero-panel .accent-line{display:none}
 .hero-panel .vars-perimeter{position:absolute;inset:0;width:100%;height:100%;z-index:4;pointer-events:none;overflow:hidden}
 .vars-perimeter-guide{fill:none;stroke:none}
 .vars-perimeter-trail{fill:none;stroke-width:2;vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-linecap:round}
 @media(prefers-reduced-motion:reduce){.vars-perimeter-trail{opacity:.7}}
 
-/* Gentle white breathing effect on contact-card symbol only */
 .contact-box .iso-ghost{
   animation: varsLogoBreathe 4.5s ease-in-out infinite;
   will-change: opacity, filter;
@@ -690,7 +684,6 @@ body::before{content:"";position:fixed;inset:0 auto 0 0;width:5px;background:#b2
   .contact-box .iso-ghost{animation:none;opacity:.8;filter:none;will-change:auto}
 }
 
-/* Hover glow exclusively for the two main hero CTAs */
 .hero-copy > .hero-actions .btn{
   transition: box-shadow .35s ease, transform .35s ease, border-color .35s ease, background-color .35s ease;
 }
@@ -708,14 +701,12 @@ body::before{content:"";position:fixed;inset:0 auto 0 0;width:5px;background:#b2
   .hero-copy > .hero-actions .btn:hover{transform:none}
 }
 
-/* Vertical timeline for the four engineering approach steps */
 .process-list{position:relative;display:grid;gap:26px;margin-top:24px;padding-left:0}
 .process-list::before{content:"";position:absolute;left:10px;top:10px;bottom:calc(100% - 10px);width:1px;background:rgba(246,247,249,.26);pointer-events:none}
 .process-item{display:grid;grid-template-columns:21px minmax(0,1fr);gap:20px;align-items:start;position:relative}
 .process-item:not(:last-child)::after{content:"";position:absolute;left:10px;top:10px;width:1px;height:calc(100% + 26px);background:rgba(246,247,249,.23);pointer-events:none}
 .process-step{width:11px;height:11px;border-radius:50%;background:#f6f7f9;border:0;box-shadow:0 0 0 4px rgba(246,247,249,.10);font-size:0;color:transparent;display:block;margin:7px 0 0 5px;padding:0}
 
-/* Center the logo and statement within the left half of About VARS */
 .banner-brand{
   display:flex;
   flex-direction:column;
@@ -733,7 +724,6 @@ body::before{content:"";position:fixed;inset:0 auto 0 0;width:5px;background:#b2
   text-align:center;
 }
 
-/* Larger centered isotipo and centered ambient illumination in About VARS */
 .banner-brand{
   background:
     radial-gradient(ellipse 58% 52% at 50% 50%, rgba(46,58,79,.52) 0%, rgba(46,58,79,.15) 58%, transparent 100%),
@@ -749,7 +739,6 @@ body::before{content:"";position:fixed;inset:0 auto 0 0;width:5px;background:#b2
   .banner-brand .iso{width:180px;max-width:62%}
 }
 
-/* Compact About VARS panel with slightly larger centered brand symbol */
 #value .banner-brand{padding-top:18px;padding-bottom:18px;min-height:0;gap:18px}
 #value .banner-brand .iso{width:240px;max-width:62%}
 #value .banner-copy{padding-top:20px;padding-bottom:20px}
@@ -757,7 +746,6 @@ body::before{content:"";position:fixed;inset:0 auto 0 0;width:5px;background:#b2
 
 #value .banner-brand .tagline{position:relative;top:-30px}
 
-/* Horizontal brand + heading in contact card */
 .contact-heading-row{display:flex;align-items:center;gap:22px;margin-bottom:22px}
 .contact-heading-row .iso-ghost{width:74px;height:auto;flex:0 0 74px;margin:0}
 .contact-heading-copy{min-width:0}
@@ -1045,8 +1033,6 @@ const initMenu = () => {
 };
 
 
-/* Animate two (and only two) curved strokes. Both share the exact same SVG guide.
-   Fade increases toward the moving leading end: transparent trailing end -> opaque leading end. */
 function initVarsPerimeter(){
   const svg=document.querySelector('.vars-perimeter');
   if(!svg)return;
