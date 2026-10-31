@@ -95,3 +95,13 @@ a:focus-visible,button:focus-visible{outline:2px solid #e28d98;outline-offset:4p
 .header-symbol{display:block;width:43px;height:45px;object-fit:contain;filter:invert(1);mix-blend-mode:screen}
 .header-brand-name{font-family:'Michroma','Montserrat',sans-serif;color:#f6f7f9;font-size:20px;font-weight:400;letter-spacing:.03em;line-height:1}
 @media(max-width:760px){.header-brand{gap:9px}.header-symbol{width:34px;height:36px}.header-brand-name{font-size:15px}}
+
+/* Persistent navigation and red identity rail — VARS brand manual */
+html{scroll-padding-top:112px}
+.header{position:sticky;top:0;z-index:1000;width:100%;background:rgba(9,11,15,.97);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+body::before{content:"";position:fixed;z-index:1100;left:0;top:0;bottom:0;width:5px;background:#b21e2e;pointer-events:none}
+@media(max-width:760px){
+  .header{position:sticky;top:0;z-index:1000}
+  html{scroll-padding-top:150px}
+  body::before{width:3px}
+}
