@@ -668,8 +668,17 @@ body::before{content:"";position:fixed;inset:0 auto 0 0;width:5px;background:#b2
 /* Two red segments travel continuously along the actual panel perimeter. */
 .hero-panel .accent-line{display:none}
 .hero-panel .vars-perimeter{position:absolute;inset:0;width:100%;height:100%;z-index:4;pointer-events:none;overflow:visible}
-.vars-perimeter rect{fill:none;stroke:#b21e2e;stroke-width:2;vector-effect:non-scaling-stroke;stroke-dasharray:8 42 8 42;stroke-dashoffset:0;animation:varsPerimeterFlow 13s linear infinite}
-@keyframes varsPerimeterFlow{to{stroke-dashoffset:-100}}
+/* Eight contiguous opacity steps form two longer fading trails, 180 degrees apart. */
+.vars-perimeter rect{fill:none;stroke:#b21e2e;stroke-width:2;vector-effect:non-scaling-stroke;stroke-dasharray:2.25 47.75 2.25 47.75;animation:varsPerimeterFlow 9s linear infinite}
+.vars-perimeter rect:nth-child(1){--phase:0;opacity:1}
+.vars-perimeter rect:nth-child(2){--phase:2.25;opacity:.90}
+.vars-perimeter rect:nth-child(3){--phase:4.5;opacity:.78}
+.vars-perimeter rect:nth-child(4){--phase:6.75;opacity:.64}
+.vars-perimeter rect:nth-child(5){--phase:9;opacity:.49}
+.vars-perimeter rect:nth-child(6){--phase:11.25;opacity:.34}
+.vars-perimeter rect:nth-child(7){--phase:13.5;opacity:.22}
+.vars-perimeter rect:nth-child(8){--phase:15.75;opacity:.11}
+@keyframes varsPerimeterFlow{from{stroke-dashoffset:var(--phase)}to{stroke-dashoffset:calc(var(--phase) - 100)}}
 @media(prefers-reduced-motion:reduce){.vars-perimeter rect{animation:none}}
 </style>
 </head>
@@ -715,7 +724,7 @@ body::before{content:"";position:fixed;inset:0 auto 0 0;width:5px;background:#b2
           </div>
         </div>
         <div class="hero-panel fade-in">
-          <svg class="vars-perimeter" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect x="0.35" y="0.35" width="99.3" height="99.3" rx="4" ry="4" pathLength="100" /></svg>
+          <svg class="vars-perimeter" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect x="0.35" y="0.35" width="99.3" height="99.3" rx="4" ry="4" pathLength="100" /><rect x="0.35" y="0.35" width="99.3" height="99.3" rx="4" ry="4" pathLength="100" /><rect x="0.35" y="0.35" width="99.3" height="99.3" rx="4" ry="4" pathLength="100" /><rect x="0.35" y="0.35" width="99.3" height="99.3" rx="4" ry="4" pathLength="100" /><rect x="0.35" y="0.35" width="99.3" height="99.3" rx="4" ry="4" pathLength="100" /><rect x="0.35" y="0.35" width="99.3" height="99.3" rx="4" ry="4" pathLength="100" /><rect x="0.35" y="0.35" width="99.3" height="99.3" rx="4" ry="4" pathLength="100" /><rect x="0.35" y="0.35" width="99.3" height="99.3" rx="4" ry="4" pathLength="100" /></svg>
           <span class="orbit one"></span><span class="orbit two"></span><span class="orbit three"></span><span class="accent-line top"></span><span class="accent-line bottom"></span>
 
           <div class="hero-card-stack">
