@@ -665,35 +665,12 @@ body::before{content:"";position:fixed;inset:0 auto 0 0;width:5px;background:#b2
 .hero-copy h1 { letter-spacing: 0.015em; }
 .section-title { letter-spacing: 0.02em; }
 
-/* Two continuous fading trails follow the perimeter. Twelve adjacent opacity steps create only two visible trails. */
+/* Exactly two synchronized, continuous strokes along the rounded border. */
 .hero-panel .accent-line{display:none}
-.hero-panel .vars-perimeter{position:absolute;inset:0;width:100%;height:100%;z-index:4;pointer-events:none}
-.vars-perimeter rect{fill:none;stroke:#b21e2e;stroke-width:2;vector-effect:non-scaling-stroke;stroke-dasharray:3.1 96.9;stroke-linecap:butt}
-.vars-perimeter rect:nth-child(1){opacity:1;animation:varsTrail1 8s linear infinite}
-@keyframes varsTrail1{from{stroke-dashoffset:0}to{stroke-dashoffset:-100}}
-.vars-perimeter rect:nth-child(2){opacity:0.85;animation:varsTrail2 8s linear infinite}
-@keyframes varsTrail2{from{stroke-dashoffset:-3.1}to{stroke-dashoffset:-103.1}}
-.vars-perimeter rect:nth-child(3){opacity:0.68;animation:varsTrail3 8s linear infinite}
-@keyframes varsTrail3{from{stroke-dashoffset:-6.2}to{stroke-dashoffset:-106.2}}
-.vars-perimeter rect:nth-child(4){opacity:0.51;animation:varsTrail4 8s linear infinite}
-@keyframes varsTrail4{from{stroke-dashoffset:-9.3}to{stroke-dashoffset:-109.3}}
-.vars-perimeter rect:nth-child(5){opacity:0.34;animation:varsTrail5 8s linear infinite}
-@keyframes varsTrail5{from{stroke-dashoffset:-12.4}to{stroke-dashoffset:-112.4}}
-.vars-perimeter rect:nth-child(6){opacity:0.17;animation:varsTrail6 8s linear infinite}
-@keyframes varsTrail6{from{stroke-dashoffset:-15.5}to{stroke-dashoffset:-115.5}}
-.vars-perimeter rect:nth-child(7){opacity:1;animation:varsTrail7 8s linear infinite}
-@keyframes varsTrail7{from{stroke-dashoffset:-50}to{stroke-dashoffset:-150}}
-.vars-perimeter rect:nth-child(8){opacity:0.85;animation:varsTrail8 8s linear infinite}
-@keyframes varsTrail8{from{stroke-dashoffset:-53.1}to{stroke-dashoffset:-153.1}}
-.vars-perimeter rect:nth-child(9){opacity:0.68;animation:varsTrail9 8s linear infinite}
-@keyframes varsTrail9{from{stroke-dashoffset:-56.2}to{stroke-dashoffset:-156.2}}
-.vars-perimeter rect:nth-child(10){opacity:0.51;animation:varsTrail10 8s linear infinite}
-@keyframes varsTrail10{from{stroke-dashoffset:-59.3}to{stroke-dashoffset:-159.3}}
-.vars-perimeter rect:nth-child(11){opacity:0.34;animation:varsTrail11 8s linear infinite}
-@keyframes varsTrail11{from{stroke-dashoffset:-62.4}to{stroke-dashoffset:-162.4}}
-.vars-perimeter rect:nth-child(12){opacity:0.17;animation:varsTrail12 8s linear infinite}
-@keyframes varsTrail12{from{stroke-dashoffset:-65.5}to{stroke-dashoffset:-165.5}}
-@media(prefers-reduced-motion:reduce){.vars-perimeter rect{animation:none;stroke-dashoffset:0}.vars-perimeter rect:nth-child(n+2){opacity:0}.vars-perimeter rect:nth-child(7){opacity:1;stroke-dashoffset:-50}}
+.hero-panel .vars-perimeter{position:absolute;inset:0;width:100%;height:100%;z-index:4;pointer-events:none;overflow:hidden}
+.vars-perimeter-guide{fill:none;stroke:none}
+.vars-perimeter-trail{fill:none;stroke-width:2;vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-linecap:round}
+@media(prefers-reduced-motion:reduce){.vars-perimeter-trail{opacity:.7}}
 </style>
 </head>
 <body>
@@ -738,7 +715,15 @@ body::before{content:"";position:fixed;inset:0 auto 0 0;width:5px;background:#b2
           </div>
         </div>
         <div class="hero-panel fade-in">
-          <svg class="vars-perimeter" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect x="0.35" y="0.35" width="99.3" height="99.3" rx="4" ry="4" pathLength="100" /><rect x="0.35" y="0.35" width="99.3" height="99.3" rx="4" ry="4" pathLength="100" /><rect x="0.35" y="0.35" width="99.3" height="99.3" rx="4" ry="4" pathLength="100" /><rect x="0.35" y="0.35" width="99.3" height="99.3" rx="4" ry="4" pathLength="100" /><rect x="0.35" y="0.35" width="99.3" height="99.3" rx="4" ry="4" pathLength="100" /><rect x="0.35" y="0.35" width="99.3" height="99.3" rx="4" ry="4" pathLength="100" /><rect x="0.35" y="0.35" width="99.3" height="99.3" rx="4" ry="4" pathLength="100" /><rect x="0.35" y="0.35" width="99.3" height="99.3" rx="4" ry="4" pathLength="100" /><rect x="0.35" y="0.35" width="99.3" height="99.3" rx="4" ry="4" pathLength="100" /><rect x="0.35" y="0.35" width="99.3" height="99.3" rx="4" ry="4" pathLength="100" /><rect x="0.35" y="0.35" width="99.3" height="99.3" rx="4" ry="4" pathLength="100" /><rect x="0.35" y="0.35" width="99.3" height="99.3" rx="4" ry="4" pathLength="100" /></svg>
+          <svg class="vars-perimeter" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+            <defs>
+              <linearGradient id="vars-trail-a" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#b21e2e" stop-opacity="1"/><stop offset="100%" stop-color="#b21e2e" stop-opacity="0.08"/></linearGradient>
+              <linearGradient id="vars-trail-b" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#b21e2e" stop-opacity="1"/><stop offset="100%" stop-color="#b21e2e" stop-opacity="0.08"/></linearGradient>
+            </defs>
+            <rect class="vars-perimeter-guide" x=".35" y=".35" width="99.3" height="99.3" rx="4" ry="4"/>
+            <path class="vars-perimeter-trail" stroke="url(#vars-trail-a)"/>
+            <path class="vars-perimeter-trail" stroke="url(#vars-trail-b)"/>
+          </svg>
           <span class="orbit one"></span><span class="orbit two"></span><span class="orbit three"></span><span class="accent-line top"></span><span class="accent-line bottom"></span>
 
           <div class="hero-card-stack">
@@ -963,6 +948,49 @@ const initMenu = () => {
   nav?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => nav.classList.remove('open')));
 };
 
+
+/* Animate two (and only two) curved strokes. Both share the exact same SVG guide.
+   Fade is deliberately reversed: opaque trailing end -> transparent leading end. */
+function initVarsPerimeter(){
+  const svg=document.querySelector('.vars-perimeter');
+  if(!svg)return;
+  const guide=svg.querySelector('.vars-perimeter-guide');
+  const trails=[...svg.querySelectorAll('.vars-perimeter-trail')];
+  const gradients=[svg.querySelector('#vars-trail-a'),svg.querySelector('#vars-trail-b')];
+  if(!guide||trails.length!==2||gradients.some(g=>!g))return;
+  const perimeter=guide.getTotalLength();
+  const trailLength=perimeter*0.17;
+  const duration=8000;
+  const reduced=window.matchMedia('(prefers-reduced-motion: reduce)');
+  const pointAt=(distance)=>guide.getPointAtLength(((distance%perimeter)+perimeter)%perimeter);
+  function render(phase){
+    for(let i=0;i<2;i++){
+      const head=(phase+i*.5)*perimeter;
+      const tail=head-trailLength;
+      const steps=48;
+      let d='';
+      for(let j=0;j<=steps;j++){
+        const p=pointAt(tail+(j/steps)*trailLength);
+        d+=(j?'L':'M')+p.x.toFixed(3)+' '+p.y.toFixed(3)+' ';
+      }
+      trails[i].setAttribute('d',d);
+      const a=pointAt(tail),b=pointAt(head);
+      gradients[i].setAttribute('x1',a.x);
+      gradients[i].setAttribute('y1',a.y);
+      gradients[i].setAttribute('x2',b.x);
+      gradients[i].setAttribute('y2',b.y);
+    }
+  }
+  let start=null;
+  function tick(time){
+    if(reduced.matches){render(0.12);return}
+    if(start===null)start=time;
+    render(((time-start)%duration)/duration);
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
 const initAnimations = () => {
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
@@ -977,6 +1005,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initLang();
   initMenu();
   initAnimations();
+  initVarsPerimeter();
 });
 </script>
 </body>
