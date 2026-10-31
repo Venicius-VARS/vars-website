@@ -671,6 +671,19 @@ body::before{content:"";position:fixed;inset:0 auto 0 0;width:5px;background:#b2
 .vars-perimeter-guide{fill:none;stroke:none}
 .vars-perimeter-trail{fill:none;stroke-width:2;vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-linecap:round}
 @media(prefers-reduced-motion:reduce){.vars-perimeter-trail{opacity:.7}}
+
+/* Gentle white breathing effect on contact-card symbol only */
+.contact-box .iso-ghost{
+  animation: varsLogoBreathe 9s ease-in-out infinite;
+  will-change: opacity, filter;
+}
+@keyframes varsLogoBreathe{
+  0%,100%{opacity:.47;filter:brightness(1) drop-shadow(0 0 0 rgba(255,255,255,0))}
+  50%{opacity:1;filter:brightness(1.85) drop-shadow(0 0 12px rgba(255,255,255,.38))}
+}
+@media(prefers-reduced-motion:reduce){
+  .contact-box .iso-ghost{animation:none;opacity:.8;filter:none;will-change:auto}
+}
 </style>
 </head>
 <body>
