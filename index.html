@@ -742,6 +742,15 @@ body::before{content:"";position:fixed;inset:0 auto 0 0;width:5px;background:#b2
 .vars-footer-bottom{border-top:1px solid rgba(255,255,255,.09);padding-top:22px;color:var(--muted-2)}
 .vars-footer-bottom small{font-size:.8rem}
 @media(max-width:640px){.vars-footer-main{grid-template-columns:1fr;gap:28px}.vars-footer-contact{justify-self:start;min-width:0}}
+
+.vars-footer-main{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;align-items:center}
+.vars-footer-brand-row{display:flex;align-items:center;gap:24px}
+.vars-footer-description{margin:0!important;white-space:pre-line;flex:1;min-width:0}
+.vars-footer-contact{min-width:0;justify-self:end}
+.vars-footer-contact-row{display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+.vars-footer-contact-row p{margin:0}
+@media(max-width:900px){.vars-footer-main{grid-template-columns:1fr;gap:28px}.vars-footer-contact{justify-self:start}}
+@media(max-width:640px){.vars-footer-brand-row,.vars-footer-contact-row{flex-wrap:wrap;gap:12px}.vars-footer-description{flex-basis:150px}}
 </style>
 </head>
 <body>
@@ -818,14 +827,18 @@ Serviços de informática</strong></div><div class="contact-item"><small data-i1
   <footer class="footer"><div class="container vars-footer">
   <div class="vars-footer-main">
     <div class="vars-footer-identity">
-      <div class="vars-footer-brand"><img src="assets/vars-symbol.svg" alt="" width="46" height="46"><span>V A R S</span></div>
-      <p data-i18n="footerDescription">Engenharia aeroespacial
+      <div class="vars-footer-brand-row">
+        <div class="vars-footer-brand"><img src="assets/vars-symbol.svg" alt="" width="46" height="46"><span>V A R S</span></div>
+        <p class="vars-footer-description" data-i18n="footerDescription">Engenharia aeroespacial
 Sistemas embarcados</p>
+      </div>
     </div>
     <div class="vars-footer-contact">
       <h3 data-i18n="footerContact">Contato</h3>
-      <a href="mailto:contato@vars.com.br">contato@vars.com.br</a>
-      <p data-i18n="footerLocation">São José dos Campos — SP, Brasil</p>
+      <div class="vars-footer-contact-row">
+        <a href="mailto:contato@vars.com.br">contato@vars.com.br</a>
+        <p data-i18n="footerLocation">São José dos Campos - SP, Brasil</p>
+      </div>
     </div>
   </div>
   <div class="vars-footer-bottom"><small data-i18n="footerCopyright">© 2026 VARS. Todos os direitos reservados.</small></div>
@@ -921,7 +934,7 @@ const translations = {
     "footerRight": "Engenharia aeroespacial • Sistemas embarcados",
     "footerDescription": "Engenharia aeroespacial\nSistemas embarcados",
     "footerContact": "Contato",
-    "footerLocation": "São José dos Campos — SP, Brasil",
+    "footerLocation": "São José dos Campos - SP, Brasil",
     "footerCopyright": "© 2026 VARS. Todos os direitos reservados."
   },
   "en": {
@@ -1013,7 +1026,7 @@ const translations = {
     "footerRight": "Aerospace engineering • Embedded systems",
     "footerDescription": "Aerospace engineering\nEmbedded systems",
     "footerContact": "Contact",
-    "footerLocation": "São José dos Campos — SP, Brazil",
+    "footerLocation": "São José dos Campos - SP, Brazil",
     "footerCopyright": "© 2026 VARS. All rights reserved."
   }
 };
