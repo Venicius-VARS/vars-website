@@ -477,12 +477,20 @@ button { font: inherit; }
   gap: 14px;
 }
 .banner-point i {
-  width: 18px;
-  height: 18px;
+  width: 11px;
+  height: 11px;
   border-radius: 50%;
-  margin-top: 5px;
+  margin: 8px 0 0 3.5px;
   background: #f6f7f9;
-  box-shadow: 0 0 0 6px rgba(246,247,249,0.10);
+  box-shadow: 0 0 0 4px rgba(246,247,249,0.08);
+  animation: varsTopicBreathe 4.5s ease-in-out infinite;
+}
+@keyframes varsTopicBreathe {
+  0%,100% { opacity: .48; filter: brightness(1); box-shadow: 0 0 0 4px rgba(246,247,249,.05); }
+  50% { opacity: 1; filter: brightness(1.85); box-shadow: 0 0 0 4px rgba(246,247,249,.12), 0 0 12px rgba(255,255,255,.35); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .banner-point i { animation: none; opacity: .9; }
 }
 .banner-point p {
   margin: 0;
