@@ -89,3 +89,9 @@ footer{background:#090b0f}
 a:focus-visible,button:focus-visible{outline:2px solid #e28d98;outline-offset:4px}
 @media(max-width:900px){.topics{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:760px){.header{position:relative}.hero{min-height:0;padding:70px 6% 22px}.hero-copy{padding-bottom:36px}.hero h1{font-size:clamp(32px,8vw,54px)}.section{padding:72px 6%}.topics{grid-template-columns:1fr}.topics article,.topics article:nth-child(4),.topics article:nth-child(even),.topics article:nth-child(odd){padding:24px}.hero-bottom{gap:12px}}
+
+/* Header branding: official symbol beside VARS lettering */
+.header-brand{display:inline-flex;align-items:center;gap:13px;white-space:nowrap}
+.header-symbol{display:block;width:43px;height:45px;object-fit:contain;filter:invert(1);mix-blend-mode:screen}
+.header-brand-name{font-family:'Michroma','Montserrat',sans-serif;color:#f6f7f9;font-size:20px;font-weight:400;letter-spacing:.03em;line-height:1}
+@media(max-width:760px){.header-brand{gap:9px}.header-symbol{width:34px;height:36px}.header-brand-name{font-size:15px}}
