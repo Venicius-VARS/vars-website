@@ -749,10 +749,11 @@ body::before{content:"";position:fixed;inset:0 auto 0 0;width:5px;background:#b2
   .banner-brand .iso{width:180px;max-width:62%}
 }
 
-/* Reduce vertical whitespace in the About VARS split panel */
-#value .banner-brand{padding-top:28px;padding-bottom:28px;min-height:0;gap:22px}
-#value .banner-copy{padding-top:28px;padding-bottom:28px}
-@media(max-width:640px){#value .banner-brand{padding-top:30px;padding-bottom:30px;gap:22px}#value .banner-copy{padding-top:30px;padding-bottom:30px}}
+/* Compact About VARS panel with slightly larger centered brand symbol */
+#value .banner-brand{padding-top:18px;padding-bottom:18px;min-height:0;gap:18px}
+#value .banner-brand .iso{width:240px;max-width:62%}
+#value .banner-copy{padding-top:20px;padding-bottom:20px}
+@media(max-width:640px){#value .banner-brand{padding-top:22px;padding-bottom:22px;gap:18px}#value .banner-brand .iso{width:200px;max-width:66%}#value .banner-copy{padding-top:24px;padding-bottom:24px}}
 </style>
 </head>
 <body>
