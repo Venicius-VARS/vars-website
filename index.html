@@ -695,6 +695,13 @@ body::before{content:"";position:fixed;inset:0 auto 0 0;width:5px;background:#b2
   .hero-copy > .hero-actions .btn{transition:none}
   .hero-copy > .hero-actions .btn:hover{transform:none}
 }
+
+/* Vertical timeline for the four engineering approach steps */
+.process-list{position:relative;display:grid;gap:26px;margin-top:24px;padding-left:0}
+.process-list::before{content:"";position:absolute;left:10px;top:10px;bottom:calc(100% - 10px);width:1px;background:rgba(246,247,249,.26);pointer-events:none}
+.process-item{display:grid;grid-template-columns:21px minmax(0,1fr);gap:20px;align-items:start;position:relative}
+.process-item:not(:last-child)::after{content:"";position:absolute;left:10px;top:10px;width:1px;height:calc(100% + 26px);background:rgba(246,247,249,.23);pointer-events:none}
+.process-step{width:11px;height:11px;border-radius:50%;background:#f6f7f9;border:0;box-shadow:0 0 0 4px rgba(246,247,249,.10);font-size:0;color:transparent;display:block;margin:7px 0 0 5px;padding:0}
 </style>
 </head>
 <body>
