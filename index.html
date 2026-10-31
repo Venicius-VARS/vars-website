@@ -748,6 +748,11 @@ body::before{content:"";position:fixed;inset:0 auto 0 0;width:5px;background:#b2
 @media(max-width:640px){
   .banner-brand .iso{width:180px;max-width:62%}
 }
+
+/* Reduce vertical whitespace in the About VARS split panel */
+#value .banner-brand{padding-top:28px;padding-bottom:28px;min-height:0;gap:22px}
+#value .banner-copy{padding-top:28px;padding-bottom:28px}
+@media(max-width:640px){#value .banner-brand{padding-top:30px;padding-bottom:30px;gap:22px}#value .banner-copy{padding-top:30px;padding-bottom:30px}}
 </style>
 </head>
 <body>
