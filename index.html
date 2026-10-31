@@ -767,6 +767,9 @@ body::before{content:"";position:fixed;inset:0 auto 0 0;width:5px;background:#b2
 .vars-footer-main{padding-bottom:20px}
 .vars-footer-bottom{padding-top:14px;text-align:center}
 @media(max-width:640px){.footer{padding-top:18px;padding-bottom:22px}.vars-footer-main{padding-bottom:18px}}
+
+.vars-footer-signature{display:flex;flex-direction:column;align-items:flex-start;gap:6px;flex-shrink:0}
+.vars-footer-signature>small{color:var(--muted-2);font-family:'Montserrat',sans-serif;font-size:.72rem;font-weight:500;line-height:1.2;letter-spacing:.025em}
 </style>
 </head>
 <body>
@@ -862,7 +865,7 @@ Serviços de informática</strong></div><div class="contact-item"><small data-i1
   <div class="vars-footer-main">
     <div class="vars-footer-identity">
       <div class="vars-footer-brand-row">
-        <div class="vars-footer-brand"><img src="assets/vars-symbol.svg" alt="" width="46" height="46"><span>V A R S</span></div>
+        <div class="vars-footer-signature"><small data-i18n="footerDevelopedBy">Desenvolvido por</small><div class="vars-footer-brand"><img src="assets/vars-symbol.svg" alt="" width="46" height="46"><span>V A R S</span></div></div>
         <p class="vars-footer-description" data-i18n="footerDescription">Engenharia aeroespacial
 Sistemas embarcados</p>
       </div>
@@ -968,6 +971,7 @@ const translations = {
     "footerRight": "Engenharia aeroespacial • Sistemas embarcados",
     "footerDescription": "Engenharia aeroespacial\nSistemas embarcados",
     "footerContact": "Contato",
+    "footerDevelopedBy": "Desenvolvido por",
     "footerLocation": "São José dos Campos - SP, Brasil",
     "footerCopyright": "© 2026 VARS. Todos os direitos reservados."
   },
@@ -1060,6 +1064,7 @@ const translations = {
     "footerRight": "Aerospace engineering • Embedded systems",
     "footerDescription": "Aerospace engineering\nEmbedded systems",
     "footerContact": "Contact",
+    "footerDevelopedBy": "Developed by",
     "footerLocation": "São José dos Campos - SP, Brazil",
     "footerCopyright": "© 2026 VARS. All rights reserved."
   }
