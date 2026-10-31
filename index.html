@@ -729,6 +729,19 @@ body::before{content:"";position:fixed;inset:0 auto 0 0;width:5px;background:#b2
 @media(max-width:480px){.contact-heading-row{gap:14px}.contact-heading-row .iso-ghost{width:56px;flex-basis:56px}.contact-heading-copy .eyebrow{font-size:.68rem}}
 
 #contact [data-i18n="contactTypeValue"]{white-space:pre-line;display:block}
+
+.vars-footer{padding-top:8px}
+.vars-footer-main{display:grid;grid-template-columns:1fr 1fr;gap:36px;padding-bottom:40px}
+.vars-footer-brand{display:flex;align-items:center;gap:14px;font-family:'Michroma','Montserrat',sans-serif;font-size:18px;letter-spacing:.04em;color:#f6f7f9}
+.vars-footer-brand img{width:42px;height:42px;object-fit:contain}
+.vars-footer-identity p,.vars-footer-contact p{white-space:pre-line;color:var(--muted);line-height:1.75;margin:14px 0 0;font-size:.9rem}
+.vars-footer-contact{justify-self:end;min-width:260px}
+.vars-footer-contact h3{margin:0 0 16px;color:#f6f7f9;font-size:.95rem;font-weight:600}
+.vars-footer-contact a{color:#f6f7f9;font-size:.94rem;text-decoration:none}
+.vars-footer-contact a:hover{text-decoration:underline}
+.vars-footer-bottom{border-top:1px solid rgba(255,255,255,.09);padding-top:22px;color:var(--muted-2)}
+.vars-footer-bottom small{font-size:.8rem}
+@media(max-width:640px){.vars-footer-main{grid-template-columns:1fr;gap:28px}.vars-footer-contact{justify-self:start;min-width:0}}
 </style>
 </head>
 <body>
@@ -802,7 +815,20 @@ body::before{content:"";position:fixed;inset:0 auto 0 0;width:5px;background:#b2
     <section class="section" id="contact"><div class="container"><span class="eyebrow fade-in" data-i18n="contactEyebrow">04 / CONTATO</span><h2 class="section-title fade-in" data-i18n="contactTitle">Todo desafio merece atenção.</h2><p class="section-intro fade-in" data-i18n="contactIntro">Entre em contato para discutir escopo, interfaces, requisitos e necessidades de apoio em engenharia e desenvolvimento de software.</p><div class="contact-shell"><div class="contact-panel fade-in"><div class="contact-list"><div class="contact-item"><small data-i18n="contactTypeLabel">Atendimento</small><strong data-i18n="contactTypeValue">Serviços de engenharia
 Serviços de informática</strong></div><div class="contact-item"><small data-i18n="contactMailLabel">E-mail</small><strong data-i18n="contactMailValue">contato@vars.com.br</strong></div><div class="contact-item"><small data-i18n="contactLangLabel">Idiomas</small><strong data-i18n="contactLangValue">Português / English</strong></div><div class="contact-item"><small data-i18n="contactUseLabel">Atuação</small><strong data-i18n="contactUseValue">Engenharia aeroespacial e sistemas embarcados</strong></div></div></div><div class="contact-box fade-in"><div class="contact-heading-row"><img class="iso-ghost" src="assets/vars-symbol-muted.svg" alt=""><div class="contact-heading-copy"><span class="eyebrow" data-i18n="boxEyebrow">ENTRE EM CONTATO</span><h3 data-i18n="boxTitle">Converse com a VARS.</h3></div></div><p data-i18n="boxText">Compartilhe as necessidades técnicas do seu projeto e avalie como nossos serviços podem apoiar o desenvolvimento, a integração e os testes.</p><div class="hero-actions" style="margin-top:22px;"><a class="btn btn-primary" href="mailto:contato@vars.com.br" data-i18n="boxCta1">Enviar e-mail</a><a class="btn btn-secondary" href="#capabilities" data-i18n="boxCta2">Conhecer serviços</a></div></div></div></div></section>
   </main>
-  <footer class="footer"><div class="container footer-grid"><small data-i18n="footerLeft">VARS</small><small data-i18n="footerRight">Engenharia aeroespacial • Sistemas embarcados</small></div></footer>
+  <footer class="footer"><div class="container vars-footer">
+  <div class="vars-footer-main">
+    <div class="vars-footer-identity">
+      <div class="vars-footer-brand"><img src="assets/vars-symbol.svg" alt="" width="46" height="46"><span>V A R S</span></div>
+      <p data-i18n="footerDescription">Engenharia aeroespacialSistemas embarcados</p>
+    </div>
+    <div class="vars-footer-contact">
+      <h3 data-i18n="footerContact">Contato</h3>
+      <a href="mailto:contato@vars.com.br">contato@vars.com.br</a>
+      <p data-i18n="footerLocation">São José dos Campos — SP, Brasil</p>
+    </div>
+  </div>
+  <div class="vars-footer-bottom"><small data-i18n="footerCopyright">© 2026 VARS. Todos os direitos reservados.</small></div>
+</div></footer>
 <script>
 const translations = {
   "pt": {
@@ -891,7 +917,11 @@ const translations = {
     "boxCta1": "Enviar e-mail",
     "boxCta2": "Conhecer serviços",
     "footerLeft": "VARS",
-    "footerRight": "Engenharia aeroespacial • Sistemas embarcados"
+    "footerRight": "Engenharia aeroespacial • Sistemas embarcados",
+    "footerDescription": "Engenharia aeroespacial\nSistemas embarcados",
+    "footerContact": "Contato",
+    "footerLocation": "São José dos Campos — SP, Brasil",
+    "footerCopyright": "© 2026 VARS. Todos os direitos reservados."
   },
   "en": {
     "navCapabilities": "Expertise",
@@ -979,7 +1009,11 @@ const translations = {
     "boxCta1": "Send email",
     "boxCta2": "Explore services",
     "footerLeft": "VARS",
-    "footerRight": "Aerospace engineering • Embedded systems"
+    "footerRight": "Aerospace engineering • Embedded systems",
+    "footerDescription": "Aerospace engineering\nEmbedded systems",
+    "footerContact": "Contact",
+    "footerLocation": "São José dos Campos — SP, Brazil",
+    "footerCopyright": "© 2026 VARS. All rights reserved."
   }
 };
 
