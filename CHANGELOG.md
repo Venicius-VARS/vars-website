@@ -1,5 +1,14 @@
 # VARS Website — Change Log
 
+## 2026-10-31 — Interactive Services & Capabilities
+
+- Added eight concise PT/EN service selectors, contextual activities and potential deliverables, and an encoded mailto enquiry for the selected discipline.
+- Retained Aerospace Dark v3, institutional content, header identity, language preference and existing contact information. No customer names, project disclosures or certification claims added.
+- Compacted the four engineering steps with native keyboard-accessible disclosures and a short deliverables overview.
+- Added visible selection and focus, a live selection announcement, reduced-motion handling, responsive cards and mobile detail-panel focus. Adjusted header spacing on narrow screens.
+- Browser validation: all eight selections, single selected state, translated detail panel and mailto, Enter/Space activation, process disclosure, desktop and 320/390/768px layouts. No JavaScript console errors observed. JavaScript syntax and git whitespace checks passed.
+- Mailto URLs were inspected without sending email. Formal screen-reader and cross-browser audits were not performed.
+
 ## 2026-10-29 — Institutional v2
 
 ### Strategy and content
