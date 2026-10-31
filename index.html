@@ -630,6 +630,9 @@ button { font: inherit; }
 }
 
 html{scroll-padding-top:108px}
+/* Offset section padding only when navigating to an anchor. */
+.section[id]{scroll-margin-top:-106px}
+@media(max-width:640px){.section[id]{scroll-margin-top:-90px}}
 .topbar{position:sticky;top:0;z-index:1000}
 body::before{content:"";position:fixed;inset:0 auto 0 0;width:5px;background:#b21e2e;z-index:1100;pointer-events:none}
 .vars-header-lockup{display:flex;align-items:center;gap:12px;white-space:nowrap}
