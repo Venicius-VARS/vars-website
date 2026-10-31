@@ -639,7 +639,10 @@ body::before{content:"";position:fixed;inset:0 auto 0 0;width:5px;background:#b2
 .hero-copy h1 { letter-spacing: 0.015em; }
 .section-title { letter-spacing: 0.02em; }
 
-.hero-panel .hero-panel .vars-perimeter{position:absolute;inset:0;width:100%;height:100%;z-index:4;pointer-events:none;overflow:hidden}
+.hero-panel{height:auto;min-height:0;display:block;align-self:center;padding:14px}
+.hero-panel .hero-card-stack{position:relative;inset:auto;width:100%;margin:0;display:grid;gap:14px}
+.hero-panel .vars-perimeter{position:absolute;inset:0;width:100%;height:100%;z-index:4;pointer-events:none;overflow:hidden}
+@media(max-width:640px){.hero-panel{height:auto;min-height:0;padding:14px}}
 .vars-perimeter-guide{fill:none;stroke:none}
 .vars-perimeter-trail{fill:none;stroke-width:2;vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-linecap:round}
 @media(prefers-reduced-motion:reduce){.vars-perimeter-trail{opacity:.7}}
