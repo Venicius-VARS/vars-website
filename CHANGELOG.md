@@ -1,5 +1,11 @@
 # VARS Website — Change Log
 
+## 2026-10-31 — Restore the original engineering timeline
+
+- Restored the complete original “Como trabalhamos / Our approach” section, including its four visible steps and workstreams panel.
+- Removed the disclosure-specific styles, workstream translation overrides and extra spacing changes to approach/contact.
+- Retained the interactive services catalog and its contextual deliverables. Verified exact markup equality with the original approach section, JavaScript syntax and whitespace checks.
+
 ## 2026-10-31 — Interactive Services & Capabilities
 
 - Added eight concise PT/EN service selectors, contextual activities and potential deliverables, and an encoded mailto enquiry for the selected discipline.
