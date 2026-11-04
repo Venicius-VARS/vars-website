@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#111725"><title>VARS Pet · Seu pequeno companheiro</title><link rel="stylesheet" href="style.css"></head>
+<body><main><header><a href="/">VARS<span> / PET LAB</span></a><button id="settingsButton" class="quiet">Conexão</button></header>
+<section class="intro"><p class="eyebrow">UM PEQUENO MUNDO CONECTADO</p><h1>Cuide de perto.<br>Mesmo de longe.</h1><p>Seu companheiro de mesa, no ESP32 e aqui.</p></section>
+<section class="pet-card"><div class="topline"><div><span class="eyebrow">SEU COMPANHEIRO</span><h2>Pixel</h2></div><span id="connection" class="badge">Demonstração local</span></div>
+<div class="habitat"><div class="stars">✦ · ˚　　✧　　　　·　✦</div><canvas width="320" height="200" id="pet" aria-label="Pixel, seu bichinho virtual"></canvas><p id="mood" aria-live="polite">Pronto para uma aventura.</p><div class="ground"></div></div>
+<div class="meters" id="meters"></div><div class="actions"><button data-action="food"><span>◒</span>Comida</button><button data-action="joy"><span>✧</span>Brincar</button><button data-action="clean"><span>♧</span>Banho</button><button data-action="sleep"><span>☾</span>Dormir</button></div>
+<p id="message" class="note" role="status">Você está testando um bichinho no navegador. Ele ainda não está conectado à placa.</p></section>
+<footer><span>FEITO PARA VIVER NA SUA MESA</span><span>ESP32 × VARS</span></footer>
+<dialog id="settings"><form method="dialog"><button class="close" aria-label="Fechar">×</button></form><h2>Conectar seu bichinho</h2><p>Entre com Google para acessar seu ESP32. O código da placa aparece no monitor serial após a configuração.</p><button id="login">Entrar com Google</button><p id="account"></p><label for="device">Identificador da placa</label><input id="device" autocomplete="off" placeholder="UID exibido pelo ESP32"><button id="pair">Vincular placa</button><button id="logout" class="quiet">Sair</button><p id="settingsStatus" role="status"></p></dialog>
+<script type="module" src="app.js"></script></main></body></html>
