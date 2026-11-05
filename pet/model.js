@@ -1,13 +1,13 @@
 export const keys=['food','joy','clean','sleep'];
-export const rates={food:8,joy:6,clean:4,energy:7,sleepRecovery:28};
+export const rates={food:8,joy:6,clean:4,energy:7,sleepRecovery:200};
 export const clamp=n=>Math.max(0,Math.min(100,n));
 export function fresh(){return {food:80,joy:80,clean:80,energy:80,sleeping:false,updatedAt:Date.now(),careCount:0,ageSeconds:0,busy:0,activity:4,actionAt:0,notice:'welcome',ack:{food:0,joy:0,clean:0,sleep:0}};}
 export function normalize(s){return {...fresh(),...s,busy:0};}
 export function advance(s,elapsed){
   if(!Number.isFinite(elapsed)||elapsed<=0)return s;
   elapsed=Math.min(elapsed,604800);s.ageSeconds=(s.ageSeconds||0)+elapsed;s.busy=Math.max(0,(s.busy||0)-elapsed);
-  while(elapsed>0){let seconds=Math.min(elapsed,60);if(s.sleeping&&s.energy<100)seconds=Math.min(seconds,(100-s.energy)*3600/28);if(seconds<0.001){if(s.sleeping&&s.energy>99.99){s.energy=100;s.sleeping=false;continue;}break;}const h=seconds/3600,low=s.food<25||s.energy<20||s.clean<25;
-    s.food=clamp(s.food-8*h*(s.sleeping?0.35:1));s.joy=clamp(s.joy-(s.sleeping?0:6*h*(low?1.8:1)));s.clean=clamp(s.clean-4*h*(s.sleeping?0.25:1));s.energy=clamp(s.energy+h*(s.sleeping?28:-7));if(s.sleeping&&s.energy>=99.999){s.energy=100;s.sleeping=false;}elapsed-=seconds;
+  while(elapsed>0){let seconds=Math.min(elapsed,60);if(s.sleeping&&s.energy<100)seconds=Math.min(seconds,(100-s.energy)*3600/rates.sleepRecovery);if(seconds<0.001){if(s.sleeping&&s.energy>99.99){s.energy=100;s.sleeping=false;continue;}break;}const h=seconds/3600,low=s.food<25||s.energy<20||s.clean<25;
+    s.food=clamp(s.food-8*h*(s.sleeping?0.35:1));s.joy=clamp(s.joy-(s.sleeping?0:6*h*(low?1.8:1)));s.clean=clamp(s.clean-4*h*(s.sleeping?0.25:1));s.energy=clamp(s.energy+h*(s.sleeping?rates.sleepRecovery:-7));if(s.sleeping&&s.energy>=99.999){s.energy=100;s.sleeping=false;}elapsed-=seconds;
   }return s;
 }
 export function act(s,key,now=Date.now()){

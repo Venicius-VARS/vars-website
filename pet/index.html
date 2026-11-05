@@ -14,11 +14,11 @@
 
 <p id="message" class="note" role="status">Entre com Google para cuidar do mesmo sapinho do seu ESP32.</p><div class="card-bottom"><span id="careCount">Um sapinho. Na tela e na sua mesa.</span><button id="demoButton" class="quiet">Testar demonstração</button></div></section>
 
-<details class="care-guide"><summary>Como cuidar do Pingo</summary><p>Acordado: saciedade −8, felicidade −6, higiene −4 e energia −7 pontos por hora. Necessidades baixas aceleram a queda da felicidade.</p><p>Dormindo: energia +28 por hora; saciedade e higiene caem mais devagar, e a felicidade não cai. Pingo acorda sozinho ao recuperar a energia.</p><p>Comida: +25 de saciedade. Brincadeira: +22 de felicidade, com gasto de energia, comida e higiene. Banho: +40 de higiene. Há uma pequena pausa entre cuidados. Ele avisa quando está cheio, limpo, dormindo ou cansado.</p></details>
+<details class="care-guide"><summary>Como cuidar do Pingo</summary><p>Acordado: saciedade −8, felicidade −6, higiene −4 e energia −7 pontos por hora. Necessidades baixas aceleram a queda da felicidade.</p><p>Dormindo: energia +200 por hora (de 0 a 100 em cerca de 30 minutos); saciedade e higiene caem mais devagar, e a felicidade não cai. Pingo acorda sozinho ao recuperar a energia.</p><p>Comida: +25 de saciedade. Brincadeira: +22 de felicidade, com gasto de energia, comida e higiene. Banho: +40 de higiene. Há uma pequena pausa entre cuidados. Ele avisa quando está cheio, limpo, dormindo ou cansado.</p></details>
 
 <footer><span>FEITO PARA VIVER NA SUA MESA</span><span>ESP32 × VARS</span></footer>
 
 <dialog id="settings"><form method="dialog"><button class="close" aria-label="Fechar">×</button></form><h2>Seu Pingo conectado</h2><p>Entre com Google para cuidar do mesmo sapinho que vive no ESP32.</p><button id="login" disabled>Entrar com Google</button><p id="account"></p><div id="pairFields" hidden><label for="device">Identificador da placa</label><input id="device" autocomplete="off" placeholder="UID exibido pelo ESP32"><button id="pair">Vincular placa</button><hr><h3>Android</h3><p>Copie o código exibido em Conexão no aplicativo Pingo nativo. Ao vincular, este Android poderá ver o pet e enviar cuidados. Um Android por vez.</p><label for="mobile">Código do Android</label><input id="mobile" autocomplete="off" placeholder="Código mostrado pelo aplicativo"><button id="pairMobile">Vincular Android</button><button id="unpairMobile" class="quiet" hidden>Desconectar Android</button><p id="mobileStatus" role="status"></p></div><p id="settingsStatus" role="status">Preparando conexão…</p></dialog>
 
-<script type="module" src="app.js?v=0.3.1"></script></main></body></html>
+<script type="module" src="app.js?v=0.3.2"></script></main></body></html>
 
