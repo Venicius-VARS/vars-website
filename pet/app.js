@@ -1,17 +1,61 @@
 import {firebaseConfig} from './config.js';
-import {fresh,advance,act,keys} from './model.js';
-const $=id=>document.getElementById(id);let state=fresh(),user=null,api=null,unsubscribe=null,remote=false,deviceUid='',pending=false;
-try{const saved=JSON.parse(localStorage.getItem('vars-pet-demo'));if(saved&&['food','joy','clean','energy'].every(k=>Number.isFinite(saved[k]))){state=saved;advance(state,(Date.now()-state.updatedAt)/1000);}}catch{}
+import {fresh,normalize,advance,act,keys,mood,notices} from './model.js';
+import {drawFrog} from './frog.js';
+const $=id=>document.getElementById(id);
+let state=fresh(),user=null,api=null,unsubscribe=null,deviceUid='',haveState=false,demo=false,waiting=null,loading=true,transportError='',lastTick=Date.now();
 const labels={food:'Saciedade',joy:'Felicidade',clean:'Higiene',energy:'Energia'};
 for(const [key,label] of Object.entries(labels)){const box=document.createElement('div');box.innerHTML=`<div class="meter-label"><label for="${key}">${label}</label><span id="${key}Value"></span></div><progress id="${key}" max="100" value="80"></progress>`;$('meters').append(box);}
-function render(){for(const key of Object.keys(labels)){$(key).value=state[key];$(key+'Value').textContent=Math.round(state[key])+'%';}$('mood').textContent=state.sleeping?'Recarregando os sonhos…':state.food<25?'Uma comidinha cairia bem.':state.joy<25?'Vamos brincar um pouquinho?':'Pronto para uma aventura.';document.querySelector('[data-action="sleep"]').lastChild.textContent=state.sleeping?'Acordar':'Dormir';if(remote){const online=Number.isFinite(state.updatedAt)&&Date.now()-state.updatedAt<45000;$('connection').textContent=online?'ESP32 conectado':'ESP32 desconectado';$('message').textContent=online?'Os cuidados são enviados para o seu ESP32.':'Último estado recebido. Cuidados enviados ficam pendentes até a placa conectar.';}}
-const canvas=$('pet'),ctx=canvas.getContext('2d');
-function draw(t){ctx.clearRect(0,0,320,200);const x=123+Math.sin(t/1800)*8,y=72+Math.round(Math.sin(t/350)*3),s=5;ctx.fillStyle='#142c37';ctx.beginPath();ctx.ellipse(160,179,40,7,0,0,Math.PI*2);ctx.fill();const sprite=['  XX      XX  ',' XOOX    XOOX ',' XOOOXXXXOOOX ',' XOOOOOOOOOOX ','XOOOOOOOOOOOOX','XOOEEOOOOEEOOX','XOOEEOOOOEEOOX','XOOOOONNOOOOOX',' XOOOOMMOOOOX ','  XOOOOOOOOX  ','  XXOOOOOOXX  ','  XX      XX  '];for(let r=0;r<sprite.length;r++)for(let c=0;c<sprite[r].length;c++){const ch=sprite[r][c];if(ch===' ')continue;ctx.fillStyle=ch==='X'?'#244b4b':ch==='O'?'#a4e6ca':ch==='E'?'#173c42':ch==='N'?'#eaa6a8':'#39706b';if(state.sleeping&&ch==='E'&&r===5)ctx.fillStyle='#a4e6ca';ctx.fillRect(x+c*s,y+r*s,s,s);}ctx.fillStyle='#a4e6ca';ctx.font='16px monospace';if(state.sleeping)ctx.fillText('z Z',216,65);requestAnimationFrame(draw);}requestAnimationFrame(draw);
-$('settingsButton').onclick=()=>$('settings').showModal();
 function status(text){$('settingsStatus').textContent=text;}
-async function setupFirebase(){if(!firebaseConfig.apiKey){$('login').disabled=true;$('pair').disabled=true;status('Conexão online ainda não configurada. A demonstração funciona neste navegador.');return;}try{const [app,auth,db]=await Promise.all([import('https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js'),import('https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js'),import('https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js')]);const instance=app.initializeApp(firebaseConfig);api={...auth,...db,auth:auth.getAuth(instance),db:db.getDatabase(instance)};auth.onAuthStateChanged(api.auth,u=>{user=u;unsubscribe?.();remote=false;deviceUid='';$('account').textContent=u?u.email:'';if(!u){$('connection').textContent='Demonstração local';return;}unsubscribe=db.onValue(db.ref(api.db,`pets/${u.uid}`),snap=>{const value=snap.val();deviceUid=value?.deviceUid||'';$('device').value=deviceUid;remote=!!deviceUid;if(value?.state){state=value.state;render();}else if(remote){$('connection').textContent='Aguardando ESP32';$('message').textContent='Placa vinculada. Aguardando o primeiro estado.';}status(`Sua identificação: ${u.uid}`);},e=>status(e.message));});}catch(e){status('Falha ao conectar: '+e.message);}}
-$('login').onclick=async()=>{try{await api.signInWithPopup(api.auth,new api.GoogleAuthProvider());}catch(e){status(e.message);}};
-$('logout').onclick=async()=>{if(api)await api.signOut(api.auth);state=fresh();render();};
-$('pair').onclick=async()=>{if(!user)return status('Entre com Google primeiro.');const uid=$('device').value.trim();if(!/^[A-Za-z0-9_-]{20,128}$/.test(uid))return status('Confira o identificador exibido pela placa.');try{await api.set(api.ref(api.db,`pets/${user.uid}/deviceUid`),uid);status('Placa vinculada. Configure sua identificação no ESP32.');}catch(e){status(e.message);}};
-document.querySelectorAll('[data-action]').forEach(button=>button.onclick=async()=>{const action=button.dataset.action;if(pending)return;if(!remote){act(state,action);render();return;}pending=true;button.disabled=true;try{await api.runTransaction(api.ref(api.db,`pets/${user.uid}/commands/${action}`),value=>(Number.isSafeInteger(value)?value:0)+1);$('message').textContent='Cuidado enviado. Aguardando confirmação da placa.';}catch(e){$('message').textContent='Não foi possível enviar: '+e.message;}finally{pending=false;button.disabled=false;}});
-let last=Date.now();setInterval(()=>{const now=Date.now();if(!remote){advance(state,(now-last)/1000);state.updatedAt=now;localStorage.setItem('vars-pet-demo',JSON.stringify(state));}last=now;render();},1000);render();setupFirebase();
+function render(){
+  const now=Date.now(),online=haveState&&now-state.updatedAt<45000;
+  $('userEmail').textContent=user?.email||'';$('settingsButton').textContent=user?'Desconectar':'Conexão';$('pairSettings').hidden=!user;
+  $('login').hidden=!!user;$('login').disabled=loading;$('pairFields').hidden=!user;$('demoButton').hidden=!!user||demo;
+  for(const key of Object.keys(labels)){$(key).value=state[key];$(key).classList.toggle('low',state[key]<25);$(key+'Value').textContent=haveState||demo?Math.round(state[key])+'%':'—';}
+  let message='Entre com Google para cuidar do mesmo sapinho que vive no seu ESP32.';
+  if(user){
+    $('connection').textContent=!deviceUid?'Vincule seu ESP32':!haveState?'Aguardando ESP32':online?'ESP32 conectado':'ESP32 desconectado';
+    message=!deviceUid?'Abra Vincular ESP32 para conectar seu bichinho.':!haveState?'Placa vinculada. Aguardando o primeiro estado real do ESP32.':online?'Este é o mesmo Pingo da sua placa. Todo cuidado é confirmado pelo ESP32.':'Mostrando o último estado real. A placa está desconectada; cuidados aguardam sua reconexão.';
+    if(waiting)message=online?'Cuidado enviado. Aguardando confirmação do ESP32…':'Cuidado enviado e pendente. Será aplicado quando o ESP32 reconectar.';
+  }else $('connection').textContent=demo?'Demonstração local':'Entre para cuidar';
+  if(demo)message='Demonstração separada, salva só neste navegador. Entre com Google para cuidar do ESP32.';
+  if(transportError)message=transportError;
+  $('message').textContent=message;
+  $('mood').textContent=user&&!haveState?'Seu sapinho está na placa. Aguardando conexão…':mood(state,now);
+  document.querySelector('[data-action="sleep"]').lastChild.textContent=state.sleeping?'Acordar':'Dormir';
+  const cooling=demo?state.busy>0.01:haveState&&now-(state.actionAt||0)<(state.activity===6?2500:6500);
+  document.querySelectorAll('[data-action]').forEach(b=>b.disabled=!!waiting||cooling||(!demo&&(!user||!deviceUid||!haveState)));
+  $('careCount').textContent=haveState||demo?`${state.careCount||0} cuidados recebidos`:'Um sapinho. Na tela e na sua mesa.';
+}
+const ctx=$('pet').getContext('2d');function animate(t){drawFrog(ctx,state,t);requestAnimationFrame(animate);}requestAnimationFrame(animate);
+$('settingsButton').onclick=async()=>{if(user){try{await api.signOut(api.auth);}catch(e){transportError='Não foi possível sair: '+e.message;render();}}else $('settings').showModal();};
+$('pairSettings').onclick=()=>$('settings').showModal();
+$('demoButton').onclick=()=>{demo=true;state=fresh();try{const saved=JSON.parse(localStorage.getItem('vars-pet-frog-demo'));if(saved&&Object.keys(labels).every(k=>Number.isFinite(saved[k]))){state=normalize(saved);advance(state,(Date.now()-saved.updatedAt)/1000);}}catch{}render();};
+async function setupFirebase(){
+  try{
+    const [app,auth,db]=await Promise.all([import('https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js'),import('https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js'),import('https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js')]);
+    const instance=app.initializeApp(firebaseConfig);api={...auth,...db,auth:auth.getAuth(instance),db:db.getDatabase(instance)};
+    auth.onAuthStateChanged(api.auth,u=>{
+      unsubscribe?.();unsubscribe=null;user=u;loading=false;waiting=null;haveState=false;deviceUid='';demo=false;state=fresh();transportError='';$('account').textContent=u?u.email:'';
+      status(u?`Sua identificação: ${u.uid}`:'Entre com Google para conectar o sapinho da sua placa.');render();
+      if(!u)return;
+      unsubscribe=db.onValue(db.ref(api.db,`pets/${u.uid}`),snap=>{
+        const value=snap.val();deviceUid=value?.deviceUid||'';$('device').value=deviceUid;
+        if(value?.state&&Object.keys(labels).every(k=>Number.isFinite(value.state[k]))){state=normalize(value.state);haveState=true;if(waiting&&(state.ack?.[waiting.action]||0)>=waiting.expected){waiting=null;transportError='';}}
+        else haveState=false;
+        render();
+      },e=>{transportError='Não foi possível sincronizar: '+e.message;render();});
+    });
+  }catch(e){loading=false;transportError='Falha na conexão: '+e.message;status(transportError);render();}
+}
+$('login').onclick=async()=>{if(!api)return;status('Abrindo login com Google…');try{await api.signInWithPopup(api.auth,new api.GoogleAuthProvider());}catch(e){status('Login não concluído: '+e.message);}};
+$('pair').onclick=async()=>{if(!user)return;const uid=$('device').value.trim();if(!/^[A-Za-z0-9_-]{20,128}$/.test(uid))return status('Confira o identificador exibido pela placa.');try{await api.set(api.ref(api.db,`pets/${user.uid}/deviceUid`),uid);status(`Placa vinculada. Sua identificação: ${user.uid}`);}catch(e){status('Não foi possível vincular: '+e.message);}};
+document.querySelectorAll('[data-action]').forEach(button=>button.onclick=async()=>{
+  const action=button.dataset.action;if(waiting)return;
+  if(demo&&!user){act(state,action);render();return;}
+  if(!user||!deviceUid||!haveState)return;
+  transportError='';waiting={action,expected:Infinity};render();
+  try{const result=await api.runTransaction(api.ref(api.db,`pets/${user.uid}/commands/${action}`),value=>(Number.isSafeInteger(value)?value:0)+1);waiting={action,expected:result.snapshot.val()};if((state.ack?.[action]||0)>=waiting.expected)waiting=null;render();}
+  catch(e){waiting=null;transportError='Cuidado não enviado: '+e.message;render();}
+});
+setInterval(()=>{const now=Date.now();if(demo&&!user){advance(state,(now-lastTick)/1000);state.updatedAt=now;localStorage.setItem('vars-pet-frog-demo',JSON.stringify(state));}lastTick=now;render();},500);
+render();setupFirebase();
