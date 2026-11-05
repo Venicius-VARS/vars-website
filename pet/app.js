@@ -1,6 +1,6 @@
 import {firebaseConfig} from './config.js';
 import {fresh,normalize,advance,act,keys,mood,notices} from './model.js';
-import {drawFrog} from './frog.js';
+import {drawFrog} from './frog.js?v=0.2.2';
 const $=id=>document.getElementById(id);
 let state=fresh(),user=null,api=null,unsubscribe=null,deviceUid='',haveState=false,demo=false,waiting=null,loading=true,transportError='',lastTick=Date.now();
 const labels={food:'Saciedade',joy:'Felicidade',clean:'Higiene',energy:'Energia'};

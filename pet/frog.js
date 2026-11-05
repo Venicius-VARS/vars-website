@@ -20,10 +20,9 @@ export function drawFrog(ctx,s,t,now=Date.now()){
   ellipse(0,-3,47,31,'#244e35');ellipse(0,-5,45,30,'#75bc55');
   for(const side of [-1,1]){
     circle(side*24,-29,20,'#244e35');circle(side*24,-30,18,'#75bc55');
-    circle(side*24,-31,13.5,'#f6f7f9');
     const blink=mode===3||(t%6100<150);
-    if(blink){ellipse(side*24,-35,14,10,'#75bc55');line(side*24-10,-29,side*24+10,-29,'#244e35',3);}
-    else {const look=Math.sin(t/1900)*2;circle(side*24+look,-29,8.5,'#0b0b0d');circle(side*24+look-3,-33,3.2,'#fff');circle(side*24+look+4,-25,1.3,'#fff');}
+    if(blink){line(side*24-10,-30,side*24-5,-27,'#244e35',2.5);line(side*24-5,-27,side*24+5,-27,'#244e35',2.5);line(side*24+5,-27,side*24+10,-30,'#244e35',2.5);}
+    else {circle(side*24,-31,13.5,'#f6f7f9');const look=Math.sin(t/1900)*2;circle(side*24+look,-29,8.5,'#0b0b0d');circle(side*24+look-3,-33,3.2,'#fff');circle(side*24+look+4,-25,1.3,'#fff');}
   }
   ellipse(-30,1,7,3,'#b21e2e65');ellipse(30,1,7,3,'#b21e2e65');circle(-7,-5,1.6,'#28643c');circle(7,-5,1.6,'#28643c');
   if(mode===0){const reach=Math.max(0,Math.sin(t/330));line(0,9,-65*reach,4-15*reach,'#dd8190',4);circle(-65, -10+Math.sin(t/130)*3,4,'#9aa0a6');ellipse(-69,-16,4,2,'#f6f7f9');ellipse(-61,-16,4,2,'#f6f7f9');circle(0,9,5,'#244e35');}
