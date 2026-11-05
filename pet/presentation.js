@@ -1,15 +1,17 @@
 // Replay confirmed care locally. Device/browser wall clocks may disagree, and
 // network delivery can consume a short animation before the browser sees it.
 export function createPresentation(){
-  let lastKey=null,started=0,duration=0;
+  let lastKey=null,started=0,duration=0,coolUntil=0;
   return {
-    reset(){lastKey=null;started=0;duration=0;},
+    reset(){lastKey=null;started=0;duration=0;coolUntil=0;},
     receive(s,now=performance.now()){
       const key=JSON.stringify([s.actionAt,s.activity,s.careCount,s.notice,s.ack]);
-      if(key===lastKey)return;
-      const first=lastKey===null;lastKey=key;
       const age=Number(s.updatedAt)-Number(s.actionAt);
       const length=s.activity===6?2500:6500;
+      const remaining=s.actionAt>0&&Number.isFinite(age)&&age>=0?Math.max(0,length-age):0;
+      if(key===lastKey){coolUntil=Math.min(coolUntil,now+remaining);return;}
+      coolUntil=now+remaining;
+      const first=lastKey===null;lastKey=key;
       duration=0;
       if(s.actionAt>0&&Number.isFinite(age)&&age>=0){
         // First load only resumes a still-active animation. Newly delivered
@@ -20,6 +22,8 @@ export function createPresentation(){
       started=now;
     },
     active(now=performance.now()){return duration>0&&now-started<duration;},
+    cooling(now=performance.now()){return now<coolUntil;},
+    cooldownMs(now=performance.now()){return Math.max(0,coolUntil-now);},
     view(s,now=performance.now(),wallNow=Date.now()){
       const active=this.active(now);
       return {...s,activity:active?s.activity:(s.sleeping?3:4),actionAt:active?wallNow-Math.max(0,now-started):0};

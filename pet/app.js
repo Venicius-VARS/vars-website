@@ -1,7 +1,7 @@
 import {firebaseConfig} from './config.js';
 import {fresh,normalize,advance,act,keys,mood,notices} from './model.js';
 import {drawFrog} from './frog.js?v=0.2.2';
-import {createPresentation} from './presentation.js?v=0.2.3';
+import {createPresentation} from './presentation.js?v=0.3.1';
 const presentation=createPresentation();
 const $=id=>document.getElementById(id);
 let state=fresh(),user=null,api=null,unsubscribe=null,deviceUid='',mobileUid='',haveState=false,demo=false,waiting=null,loading=true,transportError='',lastTick=Date.now();
@@ -17,15 +17,15 @@ function render(){
   if(user){
     $('connection').textContent=!deviceUid?'Vincule seu ESP32':!haveState?'Aguardando ESP32':online?'ESP32 conectado':'ESP32 desconectado';
     message=!deviceUid?'Abra Vincular ESP32 para conectar seu bichinho.':!haveState?'Placa vinculada. Aguardando o primeiro estado real do ESP32.':online?'Este é o mesmo Pingo da sua placa. Todo cuidado é confirmado pelo ESP32.':'Mostrando o último estado real. A placa está desconectada; cuidados aguardam sua reconexão.';
-    if(waiting)message=online?'Cuidado enviado. Aguardando confirmação do ESP32…':'Cuidado enviado e pendente. Será aplicado quando o ESP32 reconectar.';
+    if(waiting)message=!waiting.committed?'Enviando cuidado…':online?'Cuidado enviado. Aguardando o ESP32…':'Cuidado enviado e pendente. Será aplicado quando o ESP32 reconectar.';    else if(presentation.cooling())message=`Pingo está terminando o cuidado. Próximo em ${(presentation.cooldownMs()/1000).toFixed(1)} s.`;
   }else $('connection').textContent=demo?'Demonstração local':'Entre para cuidar';
   if(demo)message='Demonstração separada, salva só neste navegador. Entre com Google para cuidar do ESP32.';
   if(transportError)message=transportError;
   $('message').textContent=message;
   $('mood').textContent=user&&!haveState?'Seu sapinho está na placa. Aguardando conexão…':mood(demo?state:presentation.view(state),now);
   document.querySelector('[data-action="sleep"]').lastChild.textContent=state.sleeping?'Acordar':'Dormir';
-  const cooling=demo?state.busy>0.01:haveState&&presentation.active();
-  document.querySelectorAll('[data-action]').forEach(b=>b.disabled=!!waiting||cooling||(!demo&&(!user||!deviceUid||!haveState)));
+  const cooling=demo?state.busy>0.01:haveState&&presentation.cooling();
+  document.querySelectorAll('[data-action]').forEach(b=>{b.disabled=!!waiting||cooling||(!demo&&(!user||!deviceUid||!haveState));const pending=waiting?.action===b.dataset.action;b.classList.toggle('pending',pending);b.setAttribute('aria-busy',String(pending));});  $('pet').setAttribute('aria-busy',String(!!waiting));
   $('careCount').textContent=haveState||demo?`${state.careCount||0} cuidados recebidos`:'Um sapinho. Na tela e na sua mesa.';
 }
 const ctx=$('pet').getContext('2d');function animate(t){drawFrog(ctx,demo?state:presentation.view(state),t);requestAnimationFrame(animate);}requestAnimationFrame(animate);
@@ -55,11 +55,11 @@ document.querySelectorAll('[data-action]').forEach(button=>button.onclick=async(
   const action=button.dataset.action;if(waiting)return;
   if(demo&&!user){act(state,action);render();return;}
   if(!user||!deviceUid||!haveState)return;
-  transportError='';waiting={action,expected:Infinity};render();
-  try{const result=await api.runTransaction(api.ref(api.db,`pets/${user.uid}/commands/${action}`),value=>(Number.isSafeInteger(value)?value:0)+1);waiting={action,expected:result.snapshot.val()};if((state.ack?.[action]||0)>=waiting.expected)waiting=null;render();}
+  transportError='';waiting={action,expected:Infinity,committed:false};render();
+  try{const result=await api.runTransaction(api.ref(api.db,`pets/${user.uid}/commands/${action}`),value=>(Number.isSafeInteger(value)?value:0)+1,{applyLocally:false});waiting={action,expected:result.snapshot.val(),committed:true};if((state.ack?.[action]||0)>=waiting.expected)waiting=null;render();}
   catch(e){waiting=null;transportError='Cuidado não enviado: '+e.message;render();}
 });
-setInterval(()=>{const now=Date.now();if(demo&&!user){advance(state,(now-lastTick)/1000);state.updatedAt=now;localStorage.setItem('vars-pet-frog-demo',JSON.stringify(state));}lastTick=now;render();},500);
+setInterval(()=>{const now=Date.now();if(demo&&!user){advance(state,(now-lastTick)/1000);state.updatedAt=now;localStorage.setItem('vars-pet-frog-demo',JSON.stringify(state));}lastTick=now;render();},100);
 render();setupFirebase();
 
 $('pairMobile').onclick=async()=>{
